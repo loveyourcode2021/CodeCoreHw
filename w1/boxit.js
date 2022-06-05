@@ -10,7 +10,8 @@ if(argvs_array.length == 0){
     exit(1)
    
 } 
-if(argvs_array[2].includes("csv") && argvs_array[2] !== undefined) {
+
+if(argvs_array[2] !== undefined && argvs_array[2].includes("csv")  ) {
     data = require("fs").readFileSync(argvs_array[2], "utf8")
     if(data !== undefined)
     {
@@ -27,7 +28,10 @@ let maxLength = checkMax(argvs_array) != 0 ? checkMax(argvs_array) : 0
 //look for max length
 //returns maxlength
 function checkMax(input){
-    let maxLength = input[2].length
+    let maxLength = 0
+    if (input === undefined || input[2] === undefined) return 0;
+    else maxLength = input[2].length
+
     for(let i = 2; i < input.length ; i++)
     {
         if(maxLength <= input[i].length)
@@ -54,8 +58,9 @@ function drawBottomBorder(length)
 {
     return "┗"+"━".repeat(length)+"┛"+"\n"
 } 
-function drawBarsAround(str,str2,num = maxLength, itsCSV = false)
+function drawBarsAround(str,str2 = "", num = maxLength, itsCSV = false)
 {
+   
     var cal1 = num - str.length > 0 ? num - str.length : 0
     var cal12 = num - str2.length > 0 ? num - str2.length : 0
 
@@ -117,7 +122,8 @@ function runMain1(){
     console.log(drawBarsAround("My name is Dan")) // returns "┃My name is Dan┃"
     console.log(drawBarsAround("You are Jane  ")) // returns "┃You are Jane  ┃"
     console.log(drawBarsAround("  You are Bill")) // returns "┃  You are Bill┃"
-    data.length != 0? boxit(data, true) : boxit(argvs_array)
+   
 }
 
 runMain1()
+data.length != 0? boxit(data, true) : boxit(argvs_array)
