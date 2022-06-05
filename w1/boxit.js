@@ -117,7 +117,7 @@ function runMain1(){
     console.log(drawBarsAround("My name is Dan")) // returns "┃My name is Dan┃"
     console.log(drawBarsAround("You are Jane  ")) // returns "┃You are Jane  ┃"
     console.log(drawBarsAround("  You are Bill")) // returns "┃  You are Bill┃"
+    data.length != 0? boxit(data, true) : boxit(argvs_array)
 }
 
-
-data.length != 0? boxit(data, true) : boxit(argvs_array)
+runMain1()
