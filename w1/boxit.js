@@ -15,8 +15,8 @@ if(argvs_array[2].includes("csv") && argvs_array[2] !== undefined) {
     if(data !== undefined)
     {
         data = data.split("\r\n");
-        console.log(typeof(data), data.lenth)
-        
+        for(let i = 0 ; i < data.length ; i++) data[i] = data[i].replace(/\s+/g, '').trim() 
+
     }
 }
 
@@ -45,21 +45,27 @@ function drawTopBorder(length)
 {
     return "┏"+drawLine(length)+"┓"+"\n"
 }
-function drawMiddleBorder(length)
+function drawMiddleBorder(length, isCSV = false)
 {
+    if(isCSV) return "┣"+"━".repeat(length)+"┫"+"┣"+"━".repeat(length)+"┫"+"\n"
     return "┣"+"━".repeat(length)+"┫"+"\n"
 }
 function drawBottomBorder(length)
 {
     return "┗"+"━".repeat(length)+"┛"+"\n"
 } 
-function drawBarsAround(str)
+function drawBarsAround(str,str2,num = maxLength, itsCSV = false)
 {
-    return "┃"+`${str}`+ `${" ".repeat(maxLength - str.length)}`+"┃"+"\n"
+    var cal1 = num - str.length > 0 ? num - str.length : 0
+    var cal12 = num - str2.length > 0 ? num - str2.length : 0
+
+    if(itsCSV) return  "┃"+`${str}`+ `${" ".repeat(cal1)}`+ "┃" + `${str2}` + `${" ".repeat(cal12)}`+"┃"+"\n"
+    else return "┃"+`${str}`+ `${" ".repeat(cal1)}`+"┃"+"\n" 
 }
 
 function boxit(argvs_array, csvOn = false)
 {
+    
     if(csvOn == false){
 
         console.log(drawTopBorder(maxLength))
@@ -74,7 +80,21 @@ function boxit(argvs_array, csvOn = false)
         }
     }
     else{
-        for(let i in data) console.log(i)
+        console.log(argvs_array.length)
+        console.log(argvs_array[0].split(','))
+        argvs_array = argvs_array[0].split(',')
+        console.log(drawTopBorder(maxLength*2.5))
+        for(var i = 0 ; i < argvs_array.length; i++)
+        {
+            var result = false;
+            let cal = maxLength - argvs_array[i].length > 0 ? maxLength - argvs_array[i].length : 0
+            console.log(drawBarsAround(argvs_array[i],argvs_array[i+1],result, true))
+            console.log(drawMiddleBorder(maxLength, true))
+            i++
+            if( i == argvs_array.length-1){
+                console.log(drawBottomBorder(maxLength*2.5))
+            }
+        }
     }
 }
 
