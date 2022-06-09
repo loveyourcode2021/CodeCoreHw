@@ -67,7 +67,7 @@ function drawBarsAround(str,str2 = "", num = maxLength, itsCSV = false)
     if(itsCSV) return  "┃"+`${str}`+ `${" ".repeat(cal1)}`+ "┃" + `${str2}` + `${" ".repeat(cal12)}`+"┃"+"\n"
     else return "┃"+`${str}`+ `${" ".repeat(cal1)}`+"┃"+"\n" 
 }
-
+//nothing
 function boxit(argvs_array, csvOn = false)
 {
     
